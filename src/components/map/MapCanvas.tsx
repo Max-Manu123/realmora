@@ -10,6 +10,30 @@ export type CanvasHandle = {
   resetView: () => void;
 };
 
+function contentBounds(elements: MapElement[]) {
+  let minX = Infinity;
+  let minY = Infinity;
+  let maxX = -Infinity;
+  let maxY = -Infinity;
+  for (const el of elements) {
+    if (el.type === "road") {
+      for (const p of el.points ?? []) {
+        minX = Math.min(minX, p.x);
+        minY = Math.min(minY, p.y);
+        maxX = Math.max(maxX, p.x);
+        maxY = Math.max(maxY, p.y);
+      }
+      continue;
+    }
+    minX = Math.min(minX, el.x - el.width / 2);
+    minY = Math.min(minY, el.y - el.height / 2);
+    maxX = Math.max(maxX, el.x + el.width / 2);
+    maxY = Math.max(maxY, el.y + el.height / 2);
+  }
+  if (!Number.isFinite(minX)) return null;
+  return { minX, minY, maxX, maxY };
+}
+
 type Props = {
   elements: MapElement[];
   backgroundColor: string;
