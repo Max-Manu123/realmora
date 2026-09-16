@@ -362,7 +362,7 @@ function DashboardPage() {
         }}
       />
       <ProWaitlistDialog open={proOpen} onOpenChange={setProOpen} source="dashboard" />
-      <DialogDescription className="sr-only">MapCraft dashboard</DialogDescription>
+      
     </div>
   );
 }
