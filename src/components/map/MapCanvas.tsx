@@ -63,6 +63,7 @@ export function MapCanvas({
   draftPoints,
   handleRef,
   className,
+  autoFit = false,
 }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [size, setSize] = useState({ width: 1200, height: 800 });
