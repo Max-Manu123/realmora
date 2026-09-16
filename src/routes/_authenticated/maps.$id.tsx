@@ -436,6 +436,7 @@ function EditorPage() {
           <MapCanvas
             elements={elements}
             backgroundColor={map.background_color}
+            autoFit
             selectedId={selectedId}
             onSelect={(elementId) => {
               if (tool === "select") setSelectedId(elementId);
