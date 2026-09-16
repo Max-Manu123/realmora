@@ -111,6 +111,7 @@ function PlayPage() {
         <MapCanvas
           elements={elements}
           backgroundColor={map.background_color}
+          autoFit
           selectedId={selectedId}
           onSelect={setSelectedId}
           readOnly
