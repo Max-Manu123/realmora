@@ -239,6 +239,7 @@ function LandingPage() {
               elements={DEMO_EN}
               backgroundColor="#131722"
               readOnly
+              autoFit
               selectedId={selectedId}
               onSelect={setSelectedId}
             />
