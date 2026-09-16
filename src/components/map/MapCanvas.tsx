@@ -120,7 +120,8 @@ export function MapCanvas({
     const pad = 80;
     const w = bounds.maxX - bounds.minX + pad * 2;
     const h = bounds.maxY - bounds.minY + pad * 2;
-    const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.min(size.width / w, size.height / h)));
+    // Never magnify past 1:1 — a map with two elements should not fill the screen.
+    const scale = Math.min(1, Math.max(MIN_SCALE, Math.min(size.width / w, size.height / h)));
     setView({
       scale,
       x: (bounds.minX + bounds.maxX) / 2 - size.width / scale / 2,
