@@ -182,7 +182,13 @@ function LandingPage() {
             </div>
           </div>
           <div className="glow-primary h-80 overflow-hidden rounded-2xl border border-border lg:h-[26rem]">
-            <MapCanvas elements={DEMO_EN} backgroundColor="#131722" readOnly onSelect={setSelectedId} />
+            <MapCanvas
+              elements={DEMO_EN}
+              backgroundColor="#131722"
+              readOnly
+              autoFit
+              onSelect={setSelectedId}
+            />
           </div>
         </div>
       </section>
