@@ -111,13 +111,37 @@ export function MapCanvas({
     [size.width, size.height],
   );
 
+  const fitView = useCallback(() => {
+    const bounds = contentBounds(elements);
+    if (!bounds) {
+      setView({ x: 0, y: 0, scale: 1 });
+      return;
+    }
+    const pad = 80;
+    const w = bounds.maxX - bounds.minX + pad * 2;
+    const h = bounds.maxY - bounds.minY + pad * 2;
+    const scale = Math.min(MAX_SCALE, Math.max(MIN_SCALE, Math.min(size.width / w, size.height / h)));
+    setView({
+      scale,
+      x: (bounds.minX + bounds.maxX) / 2 - size.width / scale / 2,
+      y: (bounds.minY + bounds.maxY) / 2 - size.height / scale / 2,
+    });
+  }, [elements, size.width, size.height]);
+
+  const fittedRef = useRef(false);
+  useEffect(() => {
+    if (!autoFit || fittedRef.current || elements.length === 0 || size.width < 2) return;
+    fittedRef.current = true;
+    fitView();
+  }, [autoFit, elements.length, size.width, fitView]);
+
   useImperativeHandle(
     handleRef,
     () => ({
       zoomBy: (factor: number) => zoomAt(factor),
-      resetView: () => setView({ x: 0, y: 0, scale: 1 }),
+      resetView: () => fitView(),
     }),
-    [zoomAt],
+    [zoomAt, fitView],
   );
 
   const toWorld = useCallback(
