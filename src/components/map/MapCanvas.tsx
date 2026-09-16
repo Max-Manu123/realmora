@@ -47,6 +47,7 @@ type Props = {
   draftPoints?: { x: number; y: number }[];
   handleRef?: RefObject<CanvasHandle | null>;
   className?: string;
+  autoFit?: boolean;
 };
 
 export function MapCanvas({
